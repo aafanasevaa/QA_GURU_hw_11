@@ -52,6 +52,6 @@ tasks.withType(Test) {
 
 task owner(type: Test) {
     useJUnitPlatform {
-        includeTags "owner"
+        includeTags 'owner'
     }
 }
