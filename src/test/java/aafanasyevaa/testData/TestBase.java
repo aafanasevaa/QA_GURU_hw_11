@@ -17,7 +17,7 @@ public class TestBase {
     @BeforeAll
     static void doBeforeAll() {
         CredentialsConfig credentials = ConfigFactory.create(CredentialsConfig.class);
-        static String url = System.getProperty("url", "selenoid.autotests.cloud/wd/hub/");
+        String url = System.getProperty("url", "selenoid.autotests.cloud/wd/hub/");
         Configuration.startMaximized = true;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         Configuration.remote = format("https://%s:%s@%s", credentials.login(), credentials.password(), url);
