@@ -23,16 +23,12 @@ allure {
 
 dependencies {
     testImplementation(
-            "com.codeborne:pdf-test:1.7.0",
-            "commons-io:commons-io:2.11.0",
-            "com.codeborne:xls-test:1.2",
-            "com.opencsv:opencsv:5.5.2",
             "org.aspectj:aspectjweaver:1.9.6",
             "com.codeborne:selenide:$selenideVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "com.github.javafaker:javafaker:1.0.2",
             "org.aeonbits.owner:owner:1.0.12",
-            "org.junit.jupiter:junit-jupiter:$junitVersion")
+            "org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly(
             "org.slf4j:slf4j-simple:1.7.29",
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
@@ -41,10 +37,9 @@ dependencies {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-
-//tasks.withType(Test) {
-//    systemProperties(System.getProperties())
-//    useJUnitPlatform()
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform()
 
     testLogging {
         lifecycle {
@@ -53,11 +48,10 @@ tasks.withType(JavaCompile) {
             exceptionFormat "short"
         }
     }
+}
 
-    task properties_tests(type: Test) {
-        systemProperties(System.getProperties())
-        useJUnitPlatform {
-            includeTags "owner"
-        }
+task owner(type: Test) {
+    useJUnitPlatform {
+        includeTags 'owner'
     }
-
+}
