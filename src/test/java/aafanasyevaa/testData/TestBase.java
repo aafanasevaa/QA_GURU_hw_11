@@ -16,10 +16,10 @@ import config.CredentialsConfig;
 public class TestBase {
     @BeforeAll
     static void doBeforeAll() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+        Configuration.startMaximized = true;
         CredentialsConfig credentials = ConfigFactory.create(CredentialsConfig.class);
         String url = System.getProperty("url", "selenoid.autotests.cloud/wd/hub/");
-        Configuration.startMaximized = true;
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         Configuration.remote = format("https://%s:%s@%s", credentials.login(), credentials.password(), url);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
